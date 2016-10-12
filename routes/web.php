@@ -14,6 +14,29 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function () {
+
+//    $team1 = new \App\Team();
+//    $team2 = new \App\Team();
+//
+//    $team1->users = serialize(['erick', 'temy']);
+//    $team2->users = serialize(['fermin', 'picazo']);
+//
+//    $team1->save();
+//    $team2->save();
+//
+//    $game = new \App\Game();
+//
+//    $game->turn_time = 120;
+//    $game->team_1 = $team1->id;
+//    $game->team_2 = $team2->id;
+//
+//
+//    $game->save();
+//
+//    $team = \App\Game::find($game->id)->team1()->get();
+//
+//    return $team;
+
     return view('welcome');
 });
 

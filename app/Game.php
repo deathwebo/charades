@@ -8,11 +8,11 @@ class Game extends Model
 {
     public function team1()
     {
-        return $this->belongsTo('App\Team', 'id', 'team_1');
+        return $this->belongsTo('App\Team', 'team_1', 'id');
     }
 
     public function team2()
     {
-        return $this->belongsTo('App\Team', 'id', 'team_2');
+        return $this->belongsTo('App\Team', 'team_2', 'id');
     }
 }
