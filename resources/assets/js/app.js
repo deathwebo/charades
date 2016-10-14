@@ -15,6 +15,8 @@ require('./bootstrap');
 
 Vue.component('words', require('./components/Words.vue'));
 
+Vue.component('create-game', require('./components/CreateGame.vue'));
+
 const app = new Vue({
     el: '#app'
 });

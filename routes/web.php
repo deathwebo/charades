@@ -37,7 +37,8 @@ Route::get('/', function () {
 //
 //    return $team;
 
-    return view('welcome');
+    return view('games.create');
+//    return view('welcome');
 });
 
 Route::get('/admin', function() {
