@@ -8,7 +8,9 @@
             <div class="column">
                 <div class="control">
                     <label for="turn_time" class="label">Tiempo por turno en segundos</label>
-                    <input type="number" class="input" id="turn_time" name="turn_time" min="30" max="300" step="5">
+                    <input type="number" class="input" id="turn_time" name="turn_time"
+                           v-model="turnTime"
+                           min="30" max="300" step="5">
                 </div>
             </div>
 
@@ -30,8 +32,10 @@
 
                 <div class="team-members">
                    <ul>
-                      <li v-for="member in teamMembers1" >
-                          <button class="button">{{ member }}</button>
+                      <li v-for="(member, index) in teamMembers1" >
+                          <button
+                              v-on:click="teamMembers1.splice(index, 1)"
+                              class="button">{{ member }}</button>
                       </li>
                    </ul>
                 </div>
@@ -49,7 +53,9 @@
                             >
                         </div>
                         <div class="column">
-                            <button class="button is-primary">Agregar</button>
+                            <button
+                                v-on:click="teamMembers1.splice(index, 1)"
+                                class="button is-primary">Agregar</button>
                         </div>
                     </div>
                 </div>
@@ -65,6 +71,10 @@
             </div>
         </div>
 
+        <button
+            v-on:click="createGame"
+            class="button is-success is-large">INICIAR</button>
+
     </form>
 
 </template>
@@ -72,11 +82,12 @@
 <script type="text/babel">
     export default {
         mounted() {
-            console.log('Game maker mounted!');
+
         },
 
         data() {
             return {
+                turnTime: "",
                 newTeamMember1: "",
                 newTeamMember2: "",
                 teamMembers1: [],
@@ -97,8 +108,25 @@
                     this.teamMembers2.push(this.newTeamMember2);
                     this.newTeamMember2 = "";
                 }
+            },
 
+            createGame() {
+                let postData = {
+                    turnTime: this.turnTime,
+                    teamMembers1: this.teamMembers1,
+                    teamMembers2: this.teamMembers2
+                }
+
+
+                this.$http.post('game', postData).then((response) => {
+
+
+
+                }, (response) => {
+
+                }).bind(this);
             }
+
         }
 
     }
