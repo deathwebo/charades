@@ -17,6 +17,8 @@ Vue.component('words', require('./components/Words.vue'));
 
 Vue.component('create-game', require('./components/CreateGame.vue'));
 
+Vue.component('view-game', require('./components/ViewGame.vue'));
+
 const app = new Vue({
     el: '#app'
 });

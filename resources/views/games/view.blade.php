@@ -5,14 +5,14 @@
     <section class="section">
         <div class="container">
             <div class="heading">
-                <h1 class="title">Crear nuevo juego</h1>
+                <h1 class="title">Juego: {{ $game->id }}</h1>
             </div>
 
             <section class="section">
                 <div id="app">
 
                     <div class="container">
-                        <create-game game-url="{{ route('view_game', ['id' => 'XXX']) }}"></create-game>
+                        <view-game :passed-game="{}"></view-game>
                     </div>
 
                 </div>
@@ -23,5 +23,7 @@
 @endsection
 
 @section('scripts')
+
+
 
 @endsection

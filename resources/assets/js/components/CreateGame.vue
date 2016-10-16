@@ -1,7 +1,7 @@
 <template>
 
-    <form v-on:submit.prevent>
 
+    <form v-on:submit.prevent>
 
         <div class="columns">
 
@@ -95,6 +95,8 @@
             }
         },
 
+        props: ['gameUrl'],
+
         methods: {
             addMemberToTeam(teamNumber) {
                 event.preventDefault();
@@ -120,7 +122,7 @@
 
                 this.$http.post('game', postData).then((response) => {
 
-
+                    window.location.href = this.gameUrl.replace('XXX', response.body.id);
 
                 }, (response) => {
 

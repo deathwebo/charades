@@ -103,7 +103,15 @@ Route::post('game', function(Request $request){
     ]);
 });
 
-Route::get('game/')
+Route::get('game/{id}', function($id){
+    $game = \App\Game::with('team1')
+        ->with('team2')
+        ->findOrFail($id);
+
+    return view('games.view', [
+        'game' => $game
+    ]);
+})->name('view_game');
 
 
 
