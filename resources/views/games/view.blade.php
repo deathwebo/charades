@@ -11,9 +11,7 @@
             <section class="section">
                 <div id="app">
 
-                    <div class="container">
-                        <view-game :passed-game="{}"></view-game>
-                    </div>
+                    <view-game :passed-game="{{ $game }}"></view-game>
 
                 </div>
             </section>

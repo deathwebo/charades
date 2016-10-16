@@ -15,9 +15,9 @@ class CreateGameTeamsTable extends Migration
     {
         Schema::create('game_teams', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('users');
-            $table->text('round_users')->nullable();
-            $table->string('last_user')->nullable();
+            $table->text('players');
+            $table->text('round_players')->nullable();
+            $table->string('current_player')->nullable();
             $table->smallInteger('score')->default(0);
             $table->timestamps();
         });
