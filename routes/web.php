@@ -16,13 +16,17 @@ use Illuminate\Http\Request;
 
 Route::get('/', function (Request $request) {
 
+    Event::fire(new \App\Events\PlayerStartedTurn(['foo' => 'bar']));
+
+    Event::fire(new \App\Events\PlayerFinishedTurn(['bar' => 'foo']));
+
     $player = $request->session()->get('player');
     $game = $request->session()->get('game');
     $team = $request->session()->get('team');
 
-    Event::fire(new \App\Events\PlayerStartedTurn(['foo' => 'bar']));
+    $games = \App\Game::all();
 
-    return view('games.create', compact('player', 'game', 'team'));
+    return view('games.create', compact('player', 'game', 'team','games'));
 })->name('home');
 
 Route::get('/admin', function() {

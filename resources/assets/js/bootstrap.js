@@ -44,4 +44,3 @@ Vue.http.interceptors.push((request, next) => {
 //     key: 'your-pusher-key'
 // });
 
-require('socket.io-client');

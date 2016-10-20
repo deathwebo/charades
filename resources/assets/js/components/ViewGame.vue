@@ -61,11 +61,16 @@
 </template>
 
 <script type="text/babel">
+    let socket = io('http://localhost:3000');
 
     export default {
         mounted() {
 
             this.$set(this, 'game',this.passedGame);
+
+            socket.on("charades:App\\Events\\PlayerStartedTurn", this.handlePlayerStartedTurnEvent);
+
+            socket.on("charades:App\\Events\\PlayerFinishedTurn", this.handlePlayerFinishedTurnEvent);
 
         },
 
@@ -77,6 +82,16 @@
                     team1: Object,
                     team2: Object
                 }
+            }
+        },
+
+        methods: {
+            handlePlayerStartedTurnEvent(message) {
+                console.log(message);
+            },
+
+            handlePlayerFinishedTurnEvent(message) {
+                console.log(message);
             }
         }
     }

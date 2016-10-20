@@ -14,7 +14,7 @@ require('laravel-elixir-vue-2');
  */
 
 const paths = {
-    'bulma': 'node_modules/bulma/'
+    'bulma': 'node_modules/bulma/',
 };
 
 elixir(mix => {
