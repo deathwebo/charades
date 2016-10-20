@@ -65,7 +65,6 @@
     export default {
         mounted() {
 
-            console.log(this.passedGame);
             this.$set(this, 'game',this.passedGame);
 
         },

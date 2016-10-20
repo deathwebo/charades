@@ -10,7 +10,7 @@
 
             <section class="section">
                 <div id="app">
-                    <words></words>
+                    <words :categories="{{ $categories }}"></words>
                 </div>
             </section>
         </div>

@@ -29,13 +29,22 @@
             <div class="container">
                 <nav class="nav">
                     <div class="nav-left nav-menu">
-                        <a href="" class="nav-item">Jugar</a>
-                        <a href="" class="nav-item">Agregar palabras</a>
+                        <a href="/" class="nav-item">Inicio</a>
+                        <a href="{{ route('admin') }}" class="nav-item">Agregar palabras</a>
                     </div>
                 </nav>
             </div>
         </div>
     </section>
+
+    @if (session('message'))
+        <section class="section">
+            <article class="message {{ session('messageClass') }}">
+                <div class="message-header">Mensaje</div>
+                <div class="message-body">{{ session('message') }}</div>
+            </article>
+        </section>
+    @endif
 
     @yield('content')
 
@@ -51,6 +60,15 @@
         window.Laravel = { csrfToken: '{{ csrf_token() }}' };
     </script>
     <script src="{{ asset('js/app.js') }}"></script>
+
+    <script>
+        var socket = io('http://localhost:3000');
+        socket.on("charades:App\\Events\\PlayerStartedTurn", function(message){
+            console.log(message);
+            // increase the power everytime we load test route
+//            $('#power').text(parseInt($('#power').text()) + parseInt(message.data.power));
+        });
+    </script>
 
     @yield('scripts')
 </div>

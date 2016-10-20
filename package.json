@@ -24,5 +24,10 @@
     "vue-loader": "^9.7.0",
     "vue-resource": "^1.0.3",
     "webpack": "^1.13.2"
+  },
+  "dependencies": {
+    "ioredis": "^2.4.0",
+    "socket.io": "^1.5.0",
+    "socket.io-client": "^1.5.0"
   }
 }

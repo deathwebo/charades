@@ -1,7 +1,7 @@
 <template>
     <div class="container">
        <div class="columns">
-           <div class="column">
+           <div class="column is-three-quarters">
                <div class="columns">
                    <div class="column">
                        <p class="control has-icon has-icon-right">
@@ -17,11 +17,33 @@
 
                        </p>
                    </div>
+
                    <div class="column">
                        <button class="button is-primary"
                            v-on:click="addNewWord"
                        >Agregar</button>
                    </div>
+
+                   <div class="column control is-grouped">
+                       <p class="control">
+                           <label for="category" class="label">Categoría</label>
+                       </p>
+                       <p class="control">
+                           <span class="select">
+                               <select name="category" id="category" v-model="selectedCategory">
+                                   <option v-for="category in categories"
+                                       v-bind:value="category.id">{{ category.name }}</option>
+                               </select>
+                       </p>
+
+                       <p v-if="catError">
+                           <i class="fa fa-warning" ></i>
+                           <span class="help is-danger">{{ catError }}</span>
+                           </span>
+                       </p>
+
+                   </div>
+
                </div>
            </div>
            <div class="column content">
@@ -39,7 +61,9 @@
     export default {
 
         mounted() {
-            // GET /someUrl
+
+            this.selectedCategory = this.categories[0].id;
+
             this.$http.get('words').then((response) => {
                 // success callback
                 this.words = response.body.words;
@@ -48,20 +72,32 @@
             }).bind(this);
         },
 
+        props: ['categories'],
+
         data() {
             return {
                 newWord: "",
                 error: "",
-                words: []
+                catError: "",
+                words: [],
+                selectedCategory: {}
             }
         },
 
         methods: {
             addNewWord() {
+
+                if(!this.selectedCategory) {
+                    this.catError = "Selecciona una opción";
+                    return;
+                }
+
+
+                this.catError = '';
                 this.error = '';
 
                 // POST /someUrl
-                this.$http.post('word', {name: this.newWord}).then((response) => {
+                this.$http.post('word', {name: this.newWord, category: this.selectedCategory}).then((response) => {
 
                     if(!response.body.response) {
                         this.error = response.body.reason;

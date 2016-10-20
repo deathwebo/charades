@@ -10,9 +10,7 @@
 
             <section class="section">
                 <div id="app">
-
                     <view-game :passed-game="{{ $game }}"></view-game>
-
                 </div>
             </section>
         </div>
