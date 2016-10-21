@@ -1,7 +1,7 @@
 <template>
 <div class="container">
 
-    <h1 class="title is-1 has-text-centered">00:00:00</h1>
+    <h1 class="title is-1 has-text-centered">{{ remainingTime }} s</h1>
 
     <div class="columns">
         <div class="column">
@@ -81,17 +81,43 @@
                 'game': {
                     team1: Object,
                     team2: Object
-                }
+                },
+                remainingTime: 0,
+                tId: ""
             }
         },
 
         methods: {
             handlePlayerStartedTurnEvent(message) {
-                console.log(message);
+
+                if(this.tId) {
+                    clearInterval(this.tId);
+                }
+
+                let time = this.game.turn_time;
+
+                this.remainingTime = time;
+
+                this.tId = setInterval(() => {
+
+                    time--;
+
+                    this.remainingTime = time;
+
+                    if(time == 0) {
+                        clearInterval(this.tId);
+                    }
+
+                }, 1000);
             },
 
             handlePlayerFinishedTurnEvent(message) {
-                console.log(message);
+
+                if(this.tId) {
+                    clearInterval(this.tId);
+                }
+
+                this.$set(this, 'game',message.data.game);
             }
         }
     }

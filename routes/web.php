@@ -16,10 +16,6 @@ use Illuminate\Http\Request;
 
 Route::get('/', function (Request $request) {
 
-    Event::fire(new \App\Events\PlayerStartedTurn(['foo' => 'bar']));
-
-    Event::fire(new \App\Events\PlayerFinishedTurn(['bar' => 'foo']));
-
     $player = $request->session()->get('player');
     $game = $request->session()->get('game');
     $team = $request->session()->get('team');
@@ -242,21 +238,20 @@ Route::post('game/{id}/turn/started', function($id, Request $request) {
     // 1. We must receive: player, wordId
     $player = $request->get('player');
     $team   = $request->get('team');
-    $wordId = $request->get('word');
 
     $game = \App\Game::findOrFail($id);
 
     $teamName = "team".$team;
     $team = $game->{$teamName};
 
-    if(!in_array($player, $team->players) || $team->current_player != $player) {
+    if(!in_array($player, unserialize($team->players)) || $team->current_player != $player) {
         return response()->json([
             'response' => false,
             'reason' => 'No coincide el usuario con el equipo que juega'
         ]);
     }
 
-    $word = \App\Word::findOrFail($wordId);
+    $word = \App\Word::findOrFail($id);
 
     // 2. We fire the event PlayerStartedTurn with the word
     Event::fire(new \App\Events\PlayerStartedTurn($word));
@@ -264,7 +259,7 @@ Route::post('game/{id}/turn/started', function($id, Request $request) {
     return response()->json([
         'response' => true
     ]);
-});
+})->name('start_turn');
 
 Route::post('game/{id}/turn/finished', function($id, Request $request) {
     // 1. We must receive: player, status
@@ -277,24 +272,25 @@ Route::post('game/{id}/turn/finished', function($id, Request $request) {
     $teamName = "team".$team;
     $team = $game->{$teamName};
 
-    if(!in_array($player, $team->players) || $team->current_player != $player) {
+    $players = unserialize($team->players);
+
+    if(!in_array($player, $players) || $team->current_player != $player) {
         return response()->json([
             'response' => false,
             'reason' => 'No coincide el usuario con el equipo que juega'
         ]);
     }
 
-    // 2. We switch to the next user and team on the game
-    if($game->current_team == 1) {
-        $game->current_team = 2;
-    }
 
-    if($game->current_team == 2) {
-        $game->current_team = 1;
-    }
+    // 2. We switch to the next user and team on the game
+    $teamSwitch = [
+        '1' => '2',
+        '2' => '1'
+    ];
+
+    $game->current_team = $teamSwitch[$game->current_team];
 
     // Moving current player to the round players stack
-    $players = unserialize($team->players);
     $roundPlayers = unserialize($team->round_players);
     $roundPlayers[] = $player;
 
@@ -316,8 +312,6 @@ Route::post('game/{id}/turn/finished', function($id, Request $request) {
         $team->score++;
     }
 
-    $game->save();
-    $team->save();
     // 4. We fire the event PlayerFinishedTurn with the status
 
     $team1 = $game->team1;
@@ -331,5 +325,11 @@ Route::post('game/{id}/turn/finished', function($id, Request $request) {
 
     $game->team1 = $team1;
     $game->team2 = $team2;
-    Event::fire(new \App\Events\PlayerFinishedTurn($game));
-});
+
+    Event::fire(new \App\Events\PlayerFinishedTurn($game->toArray()));
+
+    return response()->json([
+        'response' => true,
+        'reason' => ''
+    ]);
+})->name('finish_turn');

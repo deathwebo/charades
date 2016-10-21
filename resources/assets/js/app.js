@@ -19,6 +19,8 @@ Vue.component('create-game', require('./components/CreateGame.vue'));
 
 Vue.component('view-game', require('./components/ViewGame.vue'));
 
+Vue.component('play-game', require('./components/PlayGame.vue'));
+
 const app = new Vue({
     el: '#app'
 });
