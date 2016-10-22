@@ -262,7 +262,7 @@ Route::post('game/{id}/turn/started', function($id, Request $request) {
 })->name('start_turn');
 
 Route::post('game/{id}/turn/finished', function($id, Request $request) {
-    // 1. We must receive: player, status
+    //  We must receive: player, team, status
     $player = $request->get('player');
     $team   = $request->get('team');
     $status = $request->get('status');
@@ -281,8 +281,23 @@ Route::post('game/{id}/turn/finished', function($id, Request $request) {
         ]);
     }
 
+    if($status == 'success') {
+        $team->score++;
+    }
 
-    // 2. We switch to the next user and team on the game
+    // Choosing the next player
+    $roundPlayers = unserialize($team->round_players);
+
+    $playerSelector = new RandomPlayerSelector();
+
+    $nextPlayer = $playerSelector->getRandomPlayer(array_diff($players, $roundPlayers));
+    $team->current_player = $nextPlayer;
+    $roundPlayers[] = $nextPlayer;
+
+    $team->round_players = unserialize($roundPlayers);
+
+
+    // We switch to the next team on the game
     $teamSwitch = [
         '1' => '2',
         '2' => '1'
@@ -290,29 +305,10 @@ Route::post('game/{id}/turn/finished', function($id, Request $request) {
 
     $game->current_team = $teamSwitch[$game->current_team];
 
-    // Moving current player to the round players stack
-    $roundPlayers = unserialize($team->round_players);
-    $roundPlayers[] = $player;
+    $team->save();
+    $game->save();
 
-    // If the round players equals the total players we reset the stack
-    if(count($players) == count($roundPlayers)) {
-        $roundPlayers = [];
-    }
-
-    // Choosing the next player
-
-    $playerSelector = new RandomPlayerSelector();
-
-    $nextPlayer = $playerSelector->getRandomPlayer(array_diff($players, $roundPlayers));
-
-    $team->current_player = $nextPlayer;
-
-    // 3. We adjust the score
-    if($status == 'success') {
-        $team->score++;
-    }
-
-    // 4. We fire the event PlayerFinishedTurn with the status
+    // We fire the event PlayerFinishedTurn with the status
 
     $team1 = $game->team1;
     $team2 = $game->team2;
