@@ -1,26 +1,33 @@
 <template>
 <div class="container">
 
-    <h1 class="title is-1 has-text-centered">{{ remainingTime }} s</h1>
+    <h1 class="title is-1 has-text-centered">
+        {{ remainingTime }} s
+        <span class="icon is-large">
+            <i class="fa fa-clock-o"></i>
+        </span>
+    </h1>
 
     <div class="columns">
         <div class="column">
-            <h2 class="subtitle">Jugando equipo #{{ game.current_team }}</h2>
+            <h2 class="title">Jugando equipo:</h2>
+            <span class="tag is-large is-info">#{{ game.current_team }}</span>
         </div>
         <div class="column">
-            <h2 class="subtitle">{{ currentPlayer }} esta jugando</h2>
+            <h2 class="title is-primary">Turno de: </h2> 
+            <span class="tag is-large is-primary">{{ currentPlayer }}</span>
         </div>
     </div>
 
     <div class="columns">
         <div class="column">
-            <h2 class="subtitle">Equipo 1, puntos: {{ game.team1.score }}</h2>
+            <h2 class="subtitle">Equipo 1, puntos: <span class="tag is-large is-warning">{{ game.team1.score }}</span></h2>
             <div class="columns">
                 <div class="column">
                    <h3>Jugadores</h3>
                     <ul>
                         <li v-for="player in game.team1.players">
-                            {{ player }}
+                            <tag class="tag is-medium">{{ player }}</tag>
                         </li>
                     </ul>
                 </div>
@@ -28,20 +35,20 @@
                     <h3>Participaron/activos</h3>
                     <ul>
                         <li v-for="player in game.team1.round_players">
-                            {{ player }}
+                            <tag class="tag is-medium is-success">{{ player }}</tag>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="column">
-            <h2 class="subtitle">Equipo 2, puntos: {{ game.team2.score }}</h2>
+            <h2 class="subtitle">Equipo 2, puntos: <span class="tag is-large is-danger">{{ game.team2.score }}</span></h2>
             <div class="columns">
                 <div class="column">
                     <h3>Jugadores</h3>
                     <ul>
                         <li v-for="player in game.team2.players">
-                            {{ player }}
+                            <tag class="tag is-medium">{{ player }}</tag>
                         </li>
                     </ul>
                 </div>
@@ -49,7 +56,7 @@
                     <h3>Participaron/activos</h3>
                     <ul>
                         <li v-for="player in game.team2.round_players">
-                            {{ player }}
+                            <tag class="tag is-medium is-success">{{ player }}</tag>
                         </li>
                     </ul>
                 </div>

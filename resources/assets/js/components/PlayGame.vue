@@ -6,7 +6,12 @@
 
                 <div class="columns has-text-centered">
                     <div class="column">
-                        <button class="button is-large is-success" v-on:click="start">COMENZAR</button>
+                        <button class="button is-large is-success" v-on:click="start">
+                            COMENZAR
+                            <span class="icon is-medium">
+                                <i class="fa fa-play"></i>
+                            </span>
+                        </button>
                     </div>
                 </div>
 
@@ -15,12 +20,18 @@
                         <button class="button is-large is-primary"
                                 v-on:click="finish('success')">
                             ACERTASTE
+                            <span class="icon is-medium">
+                                <i class="fa fa-check"></i>
+                            </span>
                         </button>
                     </div>
                     <div class="column has-text-left is-half">
                         <button class="button is-large is-danger"
                             v-on:click="finish('fail')">
                             FALLASTE
+                            <span class="icon is-medium">
+                                <i class="fa fa-times"></i>
+                            </span>
                         </button>
                     </div>
                 </div>
