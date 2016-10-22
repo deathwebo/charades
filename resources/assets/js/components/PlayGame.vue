@@ -10,14 +10,14 @@
                     </div>
                 </div>
 
-                <div class="columns">
-                    <div class="column has-text-right">
+                <div class="columns is-mobile">
+                    <div class="column has-text-right is-half">
                         <button class="button is-large is-primary"
                                 v-on:click="finish('success')">
                             ACERTASTE
                         </button>
                     </div>
-                    <div class="column has-text-left">
+                    <div class="column has-text-left is-half">
                         <button class="button is-large is-danger"
                             v-on:click="finish('fail')">
                             FALLASTE
@@ -73,7 +73,7 @@
 
 
                 this.$http.post(this.finishUrl.replace('XXX', this.gameId), postData).then((response) => {
-
+                    window.location = '/';
                 }, (response) => {
 
                 }).bind(this);

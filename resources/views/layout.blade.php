@@ -27,7 +27,7 @@
         </div>
         <div class="hero-foot">
             <div class="container">
-                <nav class="nav">
+                <nav class="tabs is-boxed">
                     <div class="nav-left nav-menu">
                         <a href="/" class="nav-item">Inicio</a>
                         <a href="{{ route('admin') }}" class="nav-item">Agregar palabras</a>

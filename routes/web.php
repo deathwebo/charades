@@ -288,14 +288,17 @@ Route::post('game/{id}/turn/finished', function($id, Request $request) {
     // Choosing the next player
     $roundPlayers = unserialize($team->round_players);
 
+    if(count($players) == count($roundPlayers)) {
+        $roundPlayers = [];
+    }
+
     $playerSelector = new RandomPlayerSelector();
 
     $nextPlayer = $playerSelector->getRandomPlayer(array_diff($players, $roundPlayers));
     $team->current_player = $nextPlayer;
     $roundPlayers[] = $nextPlayer;
 
-    $team->round_players = unserialize($roundPlayers);
-
+    $team->round_players = serialize($roundPlayers);
 
     // We switch to the next team on the game
     $teamSwitch = [

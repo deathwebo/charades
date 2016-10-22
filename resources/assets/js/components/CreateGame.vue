@@ -25,7 +25,9 @@
                             >
                         </div>
                         <div class="column">
-                            <button class="button is-primary">Agregar</button>
+                            <button class="button is-primary"
+                                v-on:click="addMemberToTeam(1)"
+                            >Agregar</button>
                         </div>
                     </div>
                 </div>
@@ -54,8 +56,9 @@
                         </div>
                         <div class="column">
                             <button
-                                v-on:click="teamMembers1.splice(index, 1)"
-                                class="button is-primary">Agregar</button>
+                                class="button is-primary"
+                                v-on:click="addMemberToTeam(2)"
+                                >Agregar</button>
                         </div>
                     </div>
                 </div>
@@ -63,7 +66,9 @@
                 <div class="team-members">
                     <ul>
                         <li v-for="member in teamMembers2" >
-                            <button class="button">{{ member }}</button>
+                            <button 
+                                v-on:click="teamMembers2.splice(index, 1)"
+                             class="button">{{ member }}</button>
                         </li>
                     </ul>
                 </div>

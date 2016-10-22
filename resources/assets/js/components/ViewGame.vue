@@ -8,7 +8,7 @@
             <h2 class="subtitle">Jugando equipo #{{ game.current_team }}</h2>
         </div>
         <div class="column">
-            <h2 class="subtitle">{{ game.team1.current_player }} esta jugando</h2>
+            <h2 class="subtitle">{{ currentPlayer }} esta jugando</h2>
         </div>
     </div>
 
@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class="column">
-            <h2 class="subtitle">Equipo 2, puntos: {{ game.team1.score }}</h2>
+            <h2 class="subtitle">Equipo 2, puntos: {{ game.team2.score }}</h2>
             <div class="columns">
                 <div class="column">
                     <h3>Jugadores</h3>
@@ -84,6 +84,16 @@
                 },
                 remainingTime: 0,
                 tId: ""
+            }
+        },
+
+        computed: {
+            currentPlayer() {
+                if(this.game.current_team == '1') {
+                    return this.game.team1.current_player;
+                }
+
+                return this.game.team2.current_player;
             }
         },
 
