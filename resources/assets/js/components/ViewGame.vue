@@ -14,8 +14,12 @@
             <span class="tag is-large is-info">#{{ game.current_team }}</span>
         </div>
         <div class="column">
-            <h2 class="title is-primary">Turno de: </h2> 
+            <h2 class="title">Turno de: </h2> 
             <span class="tag is-large is-primary">{{ currentPlayer }}</span>
+        </div>
+        <div class="column" v-if="category">
+            <h2 class="title">La categoría es:</h2>
+            <span class="tag is-large">{{ category }}</span>
         </div>
     </div>
 
@@ -27,7 +31,7 @@
                    <h3>Jugadores</h3>
                     <ul>
                         <li v-for="player in game.team1.players">
-                            <tag class="tag is-medium">{{ player }}</tag>
+                            <span class="tag is-medium">{{ player }}</span>
                         </li>
                     </ul>
                 </div>
@@ -35,7 +39,7 @@
                     <h3>Participaron/activos</h3>
                     <ul>
                         <li v-for="player in game.team1.round_players">
-                            <tag class="tag is-medium is-success">{{ player }}</tag>
+                            <span class="tag is-medium is-success">{{ player }}</span>
                         </li>
                     </ul>
                 </div>
@@ -48,7 +52,7 @@
                     <h3>Jugadores</h3>
                     <ul>
                         <li v-for="player in game.team2.players">
-                            <tag class="tag is-medium">{{ player }}</tag>
+                            <span class="tag is-medium">{{ player }}</span>
                         </li>
                     </ul>
                 </div>
@@ -56,7 +60,7 @@
                     <h3>Participaron/activos</h3>
                     <ul>
                         <li v-for="player in game.team2.round_players">
-                            <tag class="tag is-medium is-success">{{ player }}</tag>
+                            <span class="tag is-medium is-success">{{ player }}</span>
                         </li>
                     </ul>
                 </div>
@@ -90,7 +94,8 @@
                     team2: Object
                 },
                 remainingTime: 0,
-                tId: ""
+                tId: "",
+                category: ""
             }
         },
 
@@ -106,6 +111,8 @@
 
         methods: {
             handlePlayerStartedTurnEvent(message) {
+
+                this.category = message.data.word.category.name;
 
                 if(this.tId) {
                     clearInterval(this.tId);
@@ -129,6 +136,8 @@
             },
 
             handlePlayerFinishedTurnEvent(message) {
+
+                this.category = '';
 
                 if(this.tId) {
                     clearInterval(this.tId);

@@ -20,7 +20,11 @@ class CreateCategoriesTable extends Migration
         });
 
         $models = [
-            ['name' => 'Halloween']
+            ['name' => 'Películas'],
+            ['name' => 'Personas y Personajes'],
+            ['name' => 'Libros'],
+            ['name' => 'Marvel y DC'],
+            ['name' => 'Otros']
         ];
 
         DB::table('categories')->insert($models);

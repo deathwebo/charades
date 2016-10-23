@@ -84,7 +84,7 @@
 
 
                 this.$http.post(this.finishUrl.replace('XXX', this.gameId), postData).then((response) => {
-                    window.location = '/';
+                    // window.location = '/';
                 }, (response) => {
 
                 }).bind(this);

@@ -53,7 +53,9 @@ Route::post('word', function(Request $request){
         ]);
     }
 
-    $foundWord = \App\Word::where('name', $name)->first();
+    $foundWord = \App\Word::where('name', $name)
+        ->where('category_id', $categoryId) 
+        ->first();
 
     if($foundWord) {
         return response()->json([
@@ -251,10 +253,11 @@ Route::post('game/{id}/turn/started', function($id, Request $request) {
         ]);
     }
 
-    $word = \App\Word::findOrFail($id);
+    $word = \App\Word::with('category')
+        ->findOrFail($id);
 
     // 2. We fire the event PlayerStartedTurn with the word
-    Event::fire(new \App\Events\PlayerStartedTurn($word));
+    Event::fire(new \App\Events\PlayerStartedTurn($word->toArray()));
 
     return response()->json([
         'response' => true

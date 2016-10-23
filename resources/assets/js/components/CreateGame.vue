@@ -65,7 +65,7 @@
 
                 <div class="team-members">
                     <ul>
-                        <li v-for="member in teamMembers2" >
+                      <li v-for="(member, index) in teamMembers2" >
                             <button 
                                 v-on:click="teamMembers2.splice(index, 1)"
                              class="button">{{ member }}</button>
@@ -106,12 +106,12 @@
             addMemberToTeam(teamNumber) {
                 event.preventDefault();
 
-                if(teamNumber == 1) {
+                if(teamNumber == 1 && this.newTeamMember1 != '') {
                     this.teamMembers1.push(this.newTeamMember1);
                     this.newTeamMember1 = "";
                 }
 
-                if(teamNumber == 2) {
+                if(teamNumber == 2 && this.newTeamMember2 != '') {
                     this.teamMembers2.push(this.newTeamMember2);
                     this.newTeamMember2 = "";
                 }
