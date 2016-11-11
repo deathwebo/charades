@@ -13,13 +13,7 @@ require('laravel-elixir-vue-2');
  |
  */
 
-const paths = {
-    'bulma': 'node_modules/bulma/',
-};
-
 elixir(mix => {
-
-    mix.copy(paths.bulma+'sass/**', 'resources/assets/sass');
 
     mix.sass('app.scss')
        .webpack('app.js');

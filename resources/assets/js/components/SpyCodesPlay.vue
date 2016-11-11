@@ -64,7 +64,9 @@
                         class="show-card button"
                         v-bind:class="{'is-disabled': !item.facedown}"
                         v-on:click="revealCard(index, item)"
-                        >mostrar</button>
+                        >
+                            {{ item.facedown ? 'mostrar' : 'mostrado' }}
+                        </button>
                 </div>
             </div>
             <div class="word-wrapper">
