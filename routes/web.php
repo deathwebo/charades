@@ -1,6 +1,7 @@
 <?php
 
 use App\Lib\RandomPlayerSelector;
+use App\Lib\SpycodesManager;
 use Illuminate\Http\Request;
 
 /*
@@ -335,3 +336,25 @@ Route::post('game/{id}/turn/finished', function($id, Request $request) {
         'reason' => ''
     ]);
 })->name('finish_turn');
+
+Route::get('spycodes/play', function() {
+
+    $spycodesManager = new SpycodesManager();
+
+    if($spycodesManager->isPlayInCourse()) {
+        $words = $spycodesManager->getGeneratedWordsAsArray();
+        return view('spycodes.play', compact('words'));
+    }
+
+    $words = $spycodesManager->generateWords();
+
+    return view('spycodes.play', compact('words'));
+})->name('spycodes_play');
+
+Route::get('spycodes/reset', function() {
+    $spycodesManager = new SpycodesManager();
+
+    $spycodesManager->generateWords();
+
+    return redirect()->route('spycodes_play');
+})->name('spycodes_reset');
