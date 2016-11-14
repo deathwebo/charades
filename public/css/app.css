@@ -4352,4 +4352,65 @@ a.panel-block:hover {
       .footer a:not(.icon):hover, .footer a:visited:not(.icon):hover {
         border-bottom-color: #00d1b2; }
 
+.spycodes_menu {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 999; }
+
+.cards-container {
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap;
+  -webkit-box-flex: 1;
+  flex: 1; }
+
+.card {
+  -webkit-box-flex: 1;
+  flex: 1 0 20%;
+  box-sizing: border-box;
+  border-color: #e0ddd5;
+  border-width: medium;
+  border-style: solid;
+  color: #171e42;
+  padding: 10px;
+  max-width: 100%;
+  min-width: 20%;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column; }
+  .card .word-wrapper {
+    -webkit-box-flex: 3;
+    flex: 3;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    text-align: center; }
+    .card .word-wrapper .word {
+      -webkit-box-flex: 1;
+      flex: 1; }
+  .card .word-tag {
+    -webkit-box-flex: 1;
+    flex: 1; }
+
+.red {
+  background-color: #ff2502;
+  color: white; }
+
+.blue {
+  background-color: #3273dc;
+  color: white; }
+
+.bystander {
+  background-color: lightyellow; }
+
+.assassin {
+  background-color: #272727;
+  color: white; }
+
 /*# sourceMappingURL=app.css.map */

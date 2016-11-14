@@ -358,3 +358,23 @@ Route::get('spycodes/reset', function() {
 
     return redirect()->route('spycodes_play');
 })->name('spycodes_reset');
+
+Route::post('spycodes/revealWord/{wordKey}', function($wordKey) {
+    $spycodesManager = new SpycodesManager();
+
+    $word = $spycodesManager->revealWord($wordKey);
+
+    return response()->json(['word' => $word]);
+})->name('spycodes_reveal_word');
+
+Route::get('spycodes/view', function() {
+    $spycodesManager = new SpycodesManager();
+
+    if(!$spycodesManager->isPlayInCourse()) {
+        return 'No existe juego en curso todavía';
+    }
+
+    $words = $spycodesManager->getGeneratedWordsAsArray();
+
+    return view('spycodes.view', compact('words'));
+});

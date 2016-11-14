@@ -95,8 +95,7 @@
 
                 this.catError = '';
                 this.error = '';
-
-                // POST /someUrl
+                
                 this.$http.post('word', {name: this.newWord, category: this.selectedCategory}).then((response) => {
 
                     if(!response.body.response) {

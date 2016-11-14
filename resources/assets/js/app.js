@@ -14,14 +14,11 @@ require('./bootstrap');
  */
 
 Vue.component('words', require('./components/Words.vue'));
-
 Vue.component('create-game', require('./components/CreateGame.vue'));
-
 Vue.component('view-game', require('./components/ViewGame.vue'));
-
 Vue.component('play-game', require('./components/PlayGame.vue'));
-
 Vue.component('spycodes-play', require('./components/SpyCodesPlay.vue'));
+Vue.component('spycodes-view', require('./components/SpyCodesView.vue'));
 
 const app = new Vue({
     el: '#app'

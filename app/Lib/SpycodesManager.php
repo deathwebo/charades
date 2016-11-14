@@ -55,7 +55,7 @@ class SpycodesManager
         }
 
         \Redis::set('playing', true);
-        \Redis::set('words', serialize($words));
+        $this->setWords($words);
 
         return $words;
     }
@@ -68,5 +68,25 @@ class SpycodesManager
     public function getGeneratedWordsAsArray()
     {
         return unserialize(\Redis::get('words'));
+    }
+
+    public function revealWord($wordKey)
+    {
+        $words = $this->getGeneratedWordsAsArray();
+
+        if(!isset($words[$wordKey])) {
+            throw new Exception("The key {$wordKey} was not found");
+        }
+
+        $words[$wordKey]['facedown'] = false;
+
+        $this->setWords($words);
+
+        return $words[$wordKey];
+    }
+
+    public function setWords(array $words)
+    {
+        \Redis::set('words', serialize($words));
     }
 }

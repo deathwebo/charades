@@ -1,14 +1,24 @@
 @extends('spycodes')
 
 @section('content')
-    <a  
-        class="button is-success"
-        href="{{ route('spycodes_reset') }}" 
-        style="position:absolute;top:5px; right: 5px; z-index: 999"
-    >Reset</a>
+    <div class="spycodes_menu">
+        <a  
+            class="button is-success"
+            href="{{ route('spycodes_reset') }}" 
+        >
+            <i class="fa fa-refresh" aria-hidden="true"></i>
+        </a>
+        <a 
+            class="button is-primary"
+            href="{{ route('home') }}"
+        >
+            <i class="fa fa-home" aria-hidden="true"></i>
+        </a>
+    </div>
     <div id="app">
         <spycodes-play
             passed-words="{{ json_encode($words) }}"
+            reveal-word-url="{{ route("spycodes_reveal_word", ['wordKey' => '__XXX__']) }}"
         ></spycodes-play>
     </div>
 @endsection
