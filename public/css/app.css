@@ -1,3 +1,19 @@
+/*! bulma.io v0.2.3 | MIT License | github.com/jgthms/bulma */
+@-webkit-keyframes spinAround {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg); } }
+@keyframes spinAround {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg); } }
+
 /*! minireset.css v0.0.2 | MIT License | github.com/jgthms/minireset.css */
 html,
 body,
@@ -70,22 +86,6 @@ td,
 th {
   padding: 0;
   text-align: left; }
-
-@-webkit-keyframes spin-around {
-  from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  to {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg); } }
-
-@keyframes spin-around {
-  from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  to {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg); } }
 
 html {
   background-color: whitesmoke;
@@ -187,14 +187,6 @@ table {
     vertical-align: top; }
   table th {
     color: #363636; }
-
-@keyframes spin-around {
-  from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  to {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg); } }
 
 .is-block {
   display: block; }
@@ -458,14 +450,6 @@ a.box:hover, a.box:focus {
 
 a.box:active {
   box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.2), 0 0 0 1px #00d1b2; }
-
-@keyframes spin-around {
-  from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  to {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg); } }
 
 .button {
   -moz-appearance: none;
@@ -787,8 +771,8 @@ a.box:active {
     color: transparent !important;
     pointer-events: none; }
     .button.is-loading:after {
-      -webkit-animation: spin-around 500ms infinite linear;
-      animation: spin-around 500ms infinite linear;
+      -webkit-animation: spinAround 500ms infinite linear;
+      animation: spinAround 500ms infinite linear;
       border: 2px solid #dbdbdb;
       border-radius: 290486px;
       border-right-color: transparent;
@@ -875,22 +859,6 @@ a.box:active {
     font-size: 24px; }
     .content.is-large code {
       font-size: 18px; }
-
-@keyframes spin-around {
-  from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  to {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg); } }
-
-@keyframes spin-around {
-  from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  to {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg); } }
 
 .input,
 .textarea {
@@ -1333,7 +1301,7 @@ a.box:active {
     .control.is-grouped > .control.is-expanded {
       -webkit-box-flex: 1;
       flex-grow: 1;
-      flex-shrink: 0; }
+      flex-shrink: 1; }
     .control.is-grouped.is-grouped-centered {
       -webkit-box-pack: center;
       justify-content: center; }
@@ -1352,8 +1320,8 @@ a.box:active {
         flex-grow: 5;
         flex-shrink: 1; } }
   .control.is-loading:after {
-    -webkit-animation: spin-around 500ms infinite linear;
-    animation: spin-around 500ms infinite linear;
+    -webkit-animation: spinAround 500ms infinite linear;
+    animation: spinAround 500ms infinite linear;
     border: 2px solid #dbdbdb;
     border-radius: 290486px;
     border-right-color: transparent;
@@ -1366,14 +1334,6 @@ a.box:active {
     position: absolute !important;
     right: 8px;
     top: 8px; }
-
-@keyframes spin-around {
-  from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  to {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg); } }
 
 .image {
   display: block;
@@ -1421,14 +1381,6 @@ a.box:active {
   .image.is-128x128 {
     height: 128px;
     width: 128px; }
-
-@keyframes spin-around {
-  from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  to {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg); } }
 
 .notification {
   background-color: whitesmoke;
@@ -1538,14 +1490,6 @@ a.box:active {
   .progress.is-large {
     height: 20px; }
 
-@keyframes spin-around {
-  from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  to {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg); } }
-
 .table {
   background-color: white;
   color: #363636;
@@ -1637,14 +1581,6 @@ a.box:active {
     background-color: #fafafa; }
     .table.is-striped tbody tr:nth-child(even):hover {
       background-color: whitesmoke; }
-
-@keyframes spin-around {
-  from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  to {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg); } }
 
 .title,
 .subtitle {
@@ -1755,14 +1691,6 @@ a.box:active {
     font-weight: 400; }
     .subtitle.is-normal strong {
       font-weight: 700; }
-
-@keyframes spin-around {
-  from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  to {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg); } }
 
 .block:not(:last-child) {
   margin-bottom: 20px; }
@@ -1888,8 +1816,8 @@ a.box:active {
     max-width: 100%; }
 
 .loader {
-  -webkit-animation: spin-around 500ms infinite linear;
-  animation: spin-around 500ms infinite linear;
+  -webkit-animation: spinAround 500ms infinite linear;
+  animation: spinAround 500ms infinite linear;
   border: 2px solid #dbdbdb;
   border-radius: 290486px;
   border-right-color: transparent;
@@ -2170,14 +2098,6 @@ a.box:active {
   .highlight .il {
     color: #2aa198; }
 
-@keyframes spin-around {
-  from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  to {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg); } }
-
 .level-item .title,
 .level-item .subtitle {
   margin-bottom: 0; }
@@ -2242,14 +2162,6 @@ a.box:active {
       .level > .level-item:not(.is-narrow) {
         -webkit-box-flex: 1;
         flex-grow: 1; } }
-
-@keyframes spin-around {
-  from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  to {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg); } }
 
 .media-number,
 .media-left,
@@ -2440,14 +2352,6 @@ a.box:active {
       border-color: #ff3860;
       color: gray; }
 
-@keyframes spin-around {
-  from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  to {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg); } }
-
 .modal-background {
   bottom: 0;
   left: 0;
@@ -2590,14 +2494,6 @@ a.box:active {
   .modal.is-active {
     display: -webkit-box;
     display: flex; }
-
-@keyframes spin-around {
-  from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  to {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg); } }
 
 .nav-toggle {
   cursor: pointer;
@@ -2790,14 +2686,6 @@ a.nav-item {
     .container > .nav > .nav-left > .nav-item.is-brand:first-child {
       padding-left: 20px; } }
 
-@keyframes spin-around {
-  from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  to {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg); } }
-
 .pagination {
   -webkit-box-align: center;
   align-items: center;
@@ -2843,14 +2731,6 @@ a.nav-item {
     .pagination > a:not(:first-child) {
       -webkit-box-ordinal-group: 2;
       order: 1; } }
-
-@keyframes spin-around {
-  from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  to {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg); } }
 
 .panel-icon {
   display: inline-block;
@@ -2914,14 +2794,6 @@ a.panel-block:hover {
   border-radius: 5px; }
   .panel:not(:last-child) {
     margin-bottom: 20px; }
-
-@keyframes spin-around {
-  from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  to {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg); } }
 
 .tabs {
   -webkit-touch-callout: none;
@@ -3055,14 +2927,6 @@ a.panel-block:hover {
     .tabs.is-large.is-boxed a, .tabs.is-large.is-toggle a {
       padding-bottom: 13px;
       padding-top: 13px; }
-
-@keyframes spin-around {
-  from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  to {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg); } }
 
 .column {
   display: block;
@@ -3669,14 +3533,6 @@ a.panel-block:hover {
       display: -webkit-box;
       display: flex; } }
 
-@keyframes spin-around {
-  from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  to {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg); } }
-
 .tile {
   -webkit-box-align: stretch;
   align-items: stretch;
@@ -3758,14 +3614,6 @@ a.panel-block:hover {
       -webkit-box-flex: 0;
       flex: none;
       width: 100%; } }
-
-@keyframes spin-around {
-  from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  to {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg); } }
 
 .hero-video {
   bottom: 0;
@@ -4323,14 +4171,6 @@ a.panel-block:hover {
         flex-grow: 1;
         flex-shrink: 1; }
 
-@keyframes spin-around {
-  from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  to {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg); } }
-
 .section {
   background-color: white;
   padding: 40px 20px; }
@@ -4412,5 +4252,57 @@ a.panel-block:hover {
 .assassin {
   background-color: #272727;
   color: white; }
+
+.bounce-enter-active {
+  -webkit-animation: bounce-in .5s;
+  animation: bounce-in .5s; }
+
+.bounce-leave-active {
+  -webkit-animation: bounce-out .5s;
+  animation: bounce-out .5s; }
+
+@-webkit-keyframes bounce-in {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0); }
+  50% {
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5); }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
+
+@keyframes bounce-in {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0); }
+  50% {
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5); }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
+
+@-webkit-keyframes bounce-out {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1); }
+  50% {
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5); }
+  100% {
+    -webkit-transform: scale(0);
+    transform: scale(0); } }
+
+@keyframes bounce-out {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1); }
+  50% {
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5); }
+  100% {
+    -webkit-transform: scale(0);
+    transform: scale(0); } }
 
 /*# sourceMappingURL=app.css.map */

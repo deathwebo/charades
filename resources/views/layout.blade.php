@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="flex-center position-ref full-height">
-    <section class="hero is-primary">
+    <section class="hero is-info">
         <div class="hero-head">
             
         </div>
@@ -30,8 +30,30 @@
             <div class="container">
                 <nav class="tabs is-boxed">
                     <div class="nav-left nav-menu">
-                        <a href="/" class="nav-item">Inicio</a>
-                        <a href="{{ route('admin') }}" class="nav-item">Agregar palabras</a>
+                        <a href="/" class="nav-item">
+                            Inicio
+                            <span class="icon">
+                                <i class="fa fa-home"></i>
+                            </span>
+                        </a>
+                        <a href="{{ route('admin') }}" class="nav-item">
+                            Agregar palabras
+                            <span class="icon">
+                                <i class="fa fa-book"></i>
+                            </span>
+                        </a>
+                        <a href="{{ route('spycodes_play') }}" class="nav-item">
+                            Capitanes - SPYCODES
+                            <span class="icon">
+                                <i class="fa fa-user-secret"></i>
+                            </span>
+                        </a>
+                        <a href="{{ route('spycodes_view') }}" class="nav-item">
+                            Tablero - SPYCODES
+                            <span class="icon">
+                                <i class="fa fa-gamepad"></i>
+                            </span>
+                        </a>
                     </div>
                 </nav>
             </div>
@@ -52,7 +74,14 @@
     <section class="footer">
         <div class="container">
             <div class="content has-text-centered">
-                <p>Made by Teslark</p>
+                <p> 
+                    Made by Teslark
+                    <span class="fa-stack fa-lg" aria-hidden="true">
+                        <i class="fa fa-square-o fa-stack-2x" style="font-size: 2em;"></i>
+                        <i class="fa fa-heart fa-stack-1x"></i>
+                    </span>
+
+                </p>
             </div>
         </div>
     </section>

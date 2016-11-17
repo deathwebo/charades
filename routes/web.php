@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 
 Route::get('/', function (Request $request) {
 
+
     $player = $request->session()->get('player');
     $game = $request->session()->get('game');
     $team = $request->session()->get('team');
@@ -354,7 +355,9 @@ Route::get('spycodes/play', function() {
 Route::get('spycodes/reset', function() {
     $spycodesManager = new SpycodesManager();
 
-    $spycodesManager->generateWords();
+    $words =$spycodesManager->generateWords();
+
+    Event::fire(new \App\Events\SpyCodesResetGame($words));
 
     return redirect()->route('spycodes_play');
 })->name('spycodes_reset');
@@ -363,6 +366,8 @@ Route::post('spycodes/revealWord/{wordKey}', function($wordKey) {
     $spycodesManager = new SpycodesManager();
 
     $word = $spycodesManager->revealWord($wordKey);
+
+    Event::fire(new \App\Events\SpyCodesWordRevealed($wordKey));
 
     return response()->json(['word' => $word]);
 })->name('spycodes_reveal_word');
@@ -377,4 +382,4 @@ Route::get('spycodes/view', function() {
     $words = $spycodesManager->getGeneratedWordsAsArray();
 
     return view('spycodes.view', compact('words'));
-});
+})->name('spycodes_view');

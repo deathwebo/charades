@@ -7,12 +7,7 @@ class SpycodesManager
     public function generateWords()
     {
 
-        $rawWords = [
-            'hollywood', 'pantalla', 'jugar', 'dinosaurio', 'gato', 'grecia', 'pico', 'centro',
-            'aspiradora', 'unicornio', 'enterrador', 'calcetin', 'Lago Ness', 'caballo', 'Berlin',
-            'Ornitorrinco', 'Puerto', 'pecho', 'caja', 'compuesto', 'barco', 'reloj', 'espacio',
-            'flauta', 'torre'
-        ];
+        $rawWords = $this->_getRandomWordsFromDB();
 
         $words = [];
         $cardsStack = [
@@ -88,5 +83,17 @@ class SpycodesManager
     public function setWords(array $words)
     {
         \Redis::set('words', serialize($words));
+    }
+
+    private function _getRandomWordsFromDB()
+    {
+        $ids = \DB::table('spycodes_words')->pluck('id')->toArray();
+        $randomIds = array_rand($ids, 25);
+
+        $words = \DB::table('spycodes_words')->whereIn('id', $randomIds)->pluck('word')->toArray();
+
+        shuffle($words);
+
+        return $words;
     }
 }
