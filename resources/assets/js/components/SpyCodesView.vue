@@ -8,11 +8,9 @@
             <div class="word-tag">
                 <span class="tag">{{ index }}</span>
             </div>
-            <transition name="bounce">
-                <div class="word-wrapper" v-if="!item.facedown">
-                    <span class="word">{{ item.word }}</span>
-                </div>
-            </transition>
+            <div class="word-wrapper">
+                <span class="word">{{ item.word }}</span>
+            </div>
         </div>
     </div>
 </section>
