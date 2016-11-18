@@ -5,18 +5,20 @@
             v-bind:class="item.card"
             v-for="(item, index) in words"
         >
-            <div class="word-tag columns">
-                <div class="column">
-                    <span class="tag">{{ index }}</span>
+            <div class="word-tag columns is-mobile">
+                <div class="column is-narrow is-hidden-mobile">
+                    <span class="tag is-small">{{ index }}</span>
                 </div>
-                <div class="column">
+                <div class="column has-text-right">
                     <button 
-                        class="show-card button"
+                        class="show-card button is-small"
                         v-bind:class="{'is-disabled': !item.facedown}"
                         v-on:click="revealCard(index, item)"
                         >
-                            {{ item.facedown ? 'mostrar' : 'mostrado' }}
-                        </button>
+                        <i class="fa"
+                            v-bind:class="{ 'fa-unlock': !item.facedown, 'fa-lock': item.facedown }"
+                        ></i>
+                    </button>
                 </div>
             </div>
             <div class="word-wrapper">

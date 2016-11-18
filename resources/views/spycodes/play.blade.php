@@ -2,16 +2,10 @@
 
 @section('content')
     <div class="spycodes_menu">
-        <a  
-            class="button is-success"
-            href="{{ route('spycodes_reset') }}" 
-        >
+        <a class="button is-success is-small" href="{{ route('spycodes_reset') }}">
             <i class="fa fa-refresh" aria-hidden="true"></i>
         </a>
-        <a 
-            class="button is-primary"
-            href="{{ route('home') }}"
-        >
+        <a class="button is-primary is-small" href="{{ route('home') }}">
             <i class="fa fa-home" aria-hidden="true"></i>
         </a>
     </div>

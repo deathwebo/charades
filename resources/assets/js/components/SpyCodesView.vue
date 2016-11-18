@@ -6,7 +6,7 @@
             v-for="(item, index) in words"
         >
             <div class="word-tag">
-                <span class="tag">{{ index }}</span>
+                <span class="tag is-small">{{ index }}</span>
             </div>
             <div class="word-wrapper">
                 <span class="word">{{ item.word }}</span>
