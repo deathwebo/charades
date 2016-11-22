@@ -17,10 +17,11 @@
 </template>
 
 <script type="text/babel">
-    let socket = io('http://localhost:3000');
 
     export default {
         mounted() {
+            let socket = io(`http://${window.location.hostname}:3000`);
+    
             this.words = JSON.parse(this.passedWords);
 
             socket.on("charades:App\\Events\\SpyCodesWordRevealed", this.handleWordRevealed);

@@ -72,10 +72,11 @@
 </template>
 
 <script type="text/babel">
-    let socket = io('http://localhost:3000');
 
     export default {
         mounted() {
+
+            let socket = io(`http://${window.location.hostname}:3000`);
 
             this.$set(this, 'game',this.passedGame);
 
@@ -85,7 +86,7 @@
 
         },
 
-        props: ['passedGame'],
+        props: ['passedGame','appUrl'],
 
         data() {
             return {
