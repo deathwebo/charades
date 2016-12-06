@@ -7,7 +7,7 @@ class SpycodesManager
     public function generateWords()
     {
 
-        $rawWords = $this->_getRandomWordsFromDB();
+        $rawWords = $this->_prepareAndGetRandomWords();
 
         $words = [];
         $cardsStack = [
@@ -85,15 +85,49 @@ class SpycodesManager
         \Redis::set('words', serialize($words));
     }
 
-    private function _getRandomWordsFromDB()
+    private function _prepareAndGetRandomWords()
     {
-        $ids = \DB::table('spycodes_words')->pluck('id')->toArray();
-        $randomIds = array_rand($ids, 25);
+        $wordsIdsUsed = unserialize(\Redis::get('allUsedWordsIds'));
 
-        $words = \DB::table('spycodes_words')->whereIn('id', $randomIds)->pluck('word')->toArray();
+        if(!is_array($wordsIdsUsed)) {
+            $wordsIdsUsed = [];
+        }
 
-        shuffle($words);
+        $words = $this->_getRandomWords($wordsIdsUsed);
+
+        if(count($words) == 25) {
+
+            $wordsIds = array_column($words, 'id');
+
+            $newWordsIdsUsed = array_merge($wordsIdsUsed, $wordsIds);
+
+            \Redis::set('allUsedWordsIds', serialize($newWordsIdsUsed));
+
+            return array_column($words, 'word');
+        }
+
+        $words = $this->_getRandomWords();
+
+        \Redis::set('allUsedWordsIds', serialize(array_column($words, 'id')));
+
+        return array_column($words, 'word');
+    }
+
+    private function _getRandomWords(array $idsToSkip = [])
+    {
+        $queryBuilder = \DB::table('spycodes_words')
+            ->inRandomOrder();
+
+        if(count($idsToSkip) > 0) {
+            $queryBuilder->whereNotIn('id', $idsToSkip);
+        }
+
+        $words = $queryBuilder->take(25)
+            ->get()
+            ->toArray();
 
         return $words;
     }
+
+
 }
