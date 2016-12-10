@@ -1,12 +1,25 @@
 <template>
 <section class="hero is-fullheight">
+    
+    <div class="timer-container" v-if="remainingTime">
+
+        <progress class="progress is-success" :value="remainingTime" max="100">{{remainingTime}}%</progress>
+
+        <span class="timer tag is-success">
+            {{ remainingTime }} s
+        </span>
+    </div>
+
+
     <div class="container cards-container">
         <div class="card"
             v-bind:class="!item.facedown ? item.card : ''"
             v-for="(item, index) in words"
         >
-            <div class="word-tag">
-                <span class="tag is-small">{{ index }}</span>
+            <div class="word-tag columns is-mobile">
+                <div class="column is-narrow is-hidden-mobile">
+                    <span class="tag is-small">{{ index }}</span>
+                </div>
             </div>
             <div class="word-wrapper">
                 <span class="word">{{ item.word }}</span>
@@ -27,13 +40,17 @@
             socket.on("charades:App\\Events\\SpyCodesWordRevealed", this.handleWordRevealed);
 
             socket.on("charades:App\\Events\\SpyCodesResetGame", this.handleGameReset);
+
+            socket.on("charades:App\\Events\\SpyCodesTimerToggle", this.timerToggle);
         },
 
         props: ['passedWords'],
 
         data() {
             return {
-                words: []
+                words: [],
+                tId: "",
+                remainingTime: 0
             }
         },
 
@@ -53,6 +70,36 @@
                 }
 
                 this.words = message.data.words;
+            },
+
+            timerToggle: function() {
+
+                if(this.tId) {
+                    clearInterval(this.tId);
+                }
+
+                if(this.remainingTime > 0) {
+
+                    this.remainingTime = 0;
+
+                    return;
+                }
+
+                let time = 90;
+
+                this.remainingTime = time;
+
+                this.tId = setInterval(() => {
+
+                    time--;
+
+                    this.remainingTime = time;
+
+                    if(time == 0) {
+                        clearInterval(this.tId);
+                    }
+
+                }, 1000);
             }
         },
 

@@ -5,6 +5,9 @@
     bottom:5px;
     left: 5px;
     z-index: 999;
+    a,button {
+        color: white;
+    }
 }
 
 .cards-container {
@@ -54,4 +57,16 @@
 .assassin {
     background-color: #272727;
     color: white;
+}
+
+.timer-container {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+
+    .progress {
+        margin: 0px;
+    }
 }

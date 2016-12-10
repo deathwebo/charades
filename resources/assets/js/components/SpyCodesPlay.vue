@@ -1,5 +1,17 @@
 <template>
 <section class="hero is-fullheight">
+    <div class="spycodes_menu">
+        <a class="button is-success is-small" :href="resetUrl">
+            <i class="fa fa-refresh" aria-hidden="true"></i>
+        </a>
+        <a class="button is-primary is-small" :href="homeUrl">
+            <i class="fa fa-home" aria-hidden="true"></i>
+        </a>
+        <button class="button is-info is-small" v-on:click="toggleTimer">
+            <i class="fa fa-hourglass-half" aria-hidden="true"></i>
+        </button>
+    </div>
+
     <div class="container cards-container">
         <div class="card"
             v-bind:class="item.card"
@@ -35,7 +47,7 @@
             this.words = JSON.parse(this.passedWords);
         },
 
-        props: ['passedWords', 'revealWordUrl'],
+        props: ['passedWords', 'revealWordUrl', 'homeUrl', 'resetUrl', 'timerUrl'],
 
         data() {
             return {
@@ -53,7 +65,16 @@
                         card.facedown = false;
                     }
                 }).bind(this);
+            },
+
+            toggleTimer() {
+                let url = this.timerUrl;
+
+                this.$http.post(url).then((response) => {
+                    console.log(response.body);
+                }).bind(this);
             }
+
         }
 
     }

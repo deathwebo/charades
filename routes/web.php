@@ -383,3 +383,10 @@ Route::get('spycodes/view', function() {
 
     return view('spycodes.view', compact('words'));
 })->name('spycodes_view');
+
+Route::post('spycodes/timer/toggle', function() {
+
+    Event::fire(new \App\Events\SpycodesTimerToggle());
+
+    return response()->json(['response' => 'success']);
+})->name('spycodes_timer_toggle');
