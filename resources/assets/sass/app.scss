@@ -1,4 +1,5 @@
 @import "node_modules/bulma/bulma";
+@import "node_modules/bulma/sass/utilities/mixins";
 
 .spycodes_menu {
     position:absolute;
@@ -37,6 +38,9 @@
         .word {
             flex: 1;
             word-break: break-all;
+            @include desktop {
+                font-size: 2em;
+            }
         }
     }
     .word-tag {
