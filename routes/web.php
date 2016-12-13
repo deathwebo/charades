@@ -386,7 +386,7 @@ Route::get('spycodes/view', function() {
 
 Route::post('spycodes/timer/toggle', function() {
 
-    Event::fire(new \App\Events\SpycodesTimerToggle());
+    Event::fire(new \App\Events\SpyCodesTimerToggle());
 
     return response()->json(['response' => 'success']);
 })->name('spycodes_timer_toggle');
