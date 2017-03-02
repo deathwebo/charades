@@ -24,7 +24,7 @@
                 var containers = document.getElementsByClassName('cards-container');
 
                 if(containers.length > 0) {
-                    containers[0].style.maxHeight = "787px";
+                    containers[0].style.maxHeight = "720px";
                 }
             }
         }
