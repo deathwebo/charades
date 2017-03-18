@@ -14,15 +14,17 @@ class SpyCodesResetGame implements ShouldBroadcast
     use InteractsWithSockets, SerializesModels;
 
     public $words;
+    public $id;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($words)
+    public function __construct($words, $id)
     {
         $this->words = $words;
+        $this->id = $id;
     }
 
     /**

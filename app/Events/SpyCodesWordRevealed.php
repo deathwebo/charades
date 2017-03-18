@@ -15,14 +15,17 @@ class SpyCodesWordRevealed implements ShouldBroadcast
 
     public $wordKey;
 
+    public $id;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($wordKey)
+    public function __construct($wordKey, $id)
     {
         $this->wordKey = $wordKey;
+        $this->id = $id;
     }
 
     /**

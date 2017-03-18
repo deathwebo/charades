@@ -44,10 +44,16 @@
 <script type="text/babel">
     export default {
         mounted() {
+            let socket = io(`http://${window.location.hostname}:3000`);
+            
             this.words = JSON.parse(this.passedWords);
+
+            socket.on("charades:App\\Events\\SpyCodesWordRevealed", this.handleWordRevealed);
+
+            socket.on("charades:App\\Events\\SpyCodesResetGame", this.handleGameReset);
         },
 
-        props: ['passedWords', 'revealWordUrl', 'homeUrl', 'resetUrl', 'timerUrl'],
+        props: ['passedWords', 'revealWordUrl', 'homeUrl', 'resetUrl', 'timerUrl', 'gameId'],
 
         data() {
             return {
@@ -68,12 +74,37 @@
             },
 
             toggleTimer() {
+
+                let choice = window.confirm("¿Seguro que deseas resetear las palabras?");
+
+                if (!choice) {
+                    return;
+                }
+
                 let url = this.timerUrl;
 
                 this.$http.post(url).then((response) => {
                     console.log(response.body);
                 }).bind(this);
-            }
+            },
+
+            handleWordRevealed: function(message) {
+
+                if(message.data.wordKey === undefined && message.data.id != this.gameId) {
+                    return;
+                }
+
+                let word = this.words[message.data.wordKey];
+                word.facedown = false;
+            },
+
+            handleGameReset: function(message) {
+                if(message.data.words === undefined && message.data.id != this.gameId) {
+                    return;
+                }
+
+                this.words = message.data.words;
+            },
 
         }
 

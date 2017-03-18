@@ -19,6 +19,7 @@ Vue.component('view-game', require('./components/ViewGame.vue'));
 Vue.component('play-game', require('./components/PlayGame.vue'));
 Vue.component('spycodes-play', require('./components/SpyCodesPlay.vue'));
 Vue.component('spycodes-view', require('./components/SpyCodesView.vue'));
+Vue.component('spycodes-home', require('./components/SpyCodesHome.vue'));
 
 const app = new Vue({
     el: '#app'

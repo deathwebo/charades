@@ -44,7 +44,7 @@
             socket.on("charades:App\\Events\\SpyCodesTimerToggle", this.timerToggle);
         },
 
-        props: ['passedWords'],
+        props: ['passedWords', 'gameId'],
 
         data() {
             return {
@@ -56,7 +56,8 @@
 
         methods: {
             handleWordRevealed: function(message) {
-                if(message.data.wordKey === undefined) {
+
+                if(message.data.wordKey === undefined && message.data.id != this.gameId) {
                     return;
                 }
 
@@ -65,14 +66,18 @@
             },
 
             handleGameReset: function(message) {
-                if(message.data.words === undefined) {
+                if(message.data.words === undefined && message.data.id != this.gameId) {
                     return;
                 }
 
                 this.words = message.data.words;
             },
 
-            timerToggle: function() {
+            timerToggle: function(message) {
+
+                if(message.data.id != this.gameId) {
+                    return;
+                }
 
                 if(this.tId) {
                     clearInterval(this.tId);

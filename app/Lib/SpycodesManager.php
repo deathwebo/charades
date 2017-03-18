@@ -4,10 +4,10 @@ namespace App\Lib;
 
 class SpycodesManager
 {
-    public function generateWords()
+    public function generateWords($gameId)
     {
 
-        $rawWords = $this->_prepareAndGetRandomWords();
+        $rawWords = $this->_prepareAndGetRandomWords($gameId);
 
         $words = [];
         $cardsStack = [
@@ -49,25 +49,19 @@ class SpycodesManager
             }
         }
 
-        \Redis::set('playing', true);
-        $this->setWords($words);
+        $this->setWords($gameId, $words);
 
         return $words;
     }
 
-    public function isPlayInCourse()
+    public function getGeneratedWordsAsArray($gameId)
     {
-        return (bool) \Redis::get('playing');
+        return unserialize(\Redis::get("{$gameId}.words"));
     }
 
-    public function getGeneratedWordsAsArray()
+    public function revealWord($gameId, $wordKey)
     {
-        return unserialize(\Redis::get('words'));
-    }
-
-    public function revealWord($wordKey)
-    {
-        $words = $this->getGeneratedWordsAsArray();
+        $words = $this->getGeneratedWordsAsArray($gameId);
 
         if(!isset($words[$wordKey])) {
             throw new Exception("The key {$wordKey} was not found");
@@ -75,19 +69,19 @@ class SpycodesManager
 
         $words[$wordKey]['facedown'] = false;
 
-        $this->setWords($words);
+        $this->setWords($gameId, $words);
 
         return $words[$wordKey];
     }
 
-    public function setWords(array $words)
+    public function setWords($gameId,array $words)
     {
-        \Redis::set('words', serialize($words));
+        \Redis::set("{$gameId}.words", serialize($words));
     }
 
-    private function _prepareAndGetRandomWords()
+    private function _prepareAndGetRandomWords($gameId)
     {
-        $wordsIdsUsed = unserialize(\Redis::get('allUsedWordsIds'));
+        $wordsIdsUsed = unserialize(\Redis::get("{$gameId}.allUsedWordsIds"));
 
         if(!is_array($wordsIdsUsed)) {
             $wordsIdsUsed = [];
@@ -101,14 +95,14 @@ class SpycodesManager
 
             $newWordsIdsUsed = array_merge($wordsIdsUsed, $wordsIds);
 
-            \Redis::set('allUsedWordsIds', serialize($newWordsIdsUsed));
+            \Redis::set("{$gameId}.allUsedWordsIds", serialize($newWordsIdsUsed));
 
             return array_column($words, 'word');
         }
 
         $words = $this->_getRandomWords();
 
-        \Redis::set('allUsedWordsIds', serialize(array_column($words, 'id')));
+        \Redis::set("{$gameId}.allUsedWordsIds", serialize(array_column($words, 'id')));
 
         return array_column($words, 'word');
     }

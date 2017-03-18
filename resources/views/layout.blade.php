@@ -20,8 +20,8 @@
             <div class="container">
                 <div class="columns">
                     <div class="column">
-                        <h1 class="title">Caras y Gestos</h1>
-                        <h2 class="subtitle">Juega caras y gestos con tus amigos!</h2>
+                        <h1 class="title">Teslark Games</h1>
+                        <h2 class="subtitle">Juega caras y gestos y Spycodes!</h2>
                     </div>
                 </div>
             </div>
@@ -36,22 +36,16 @@
                                 <i class="fa fa-home"></i>
                             </span>
                         </a>
+                        <a href="{{ route('charades_home') }}" class="nav-item">
+                            Caras y gestos
+                            <span class="icon">
+                                <i class="fa fa-smile-o"></i>
+                            </span>
+                        </a>
                         <a href="{{ route('admin') }}" class="nav-item">
                             Agregar palabras
                             <span class="icon">
                                 <i class="fa fa-book"></i>
-                            </span>
-                        </a>
-                        <a href="{{ route('spycodes_play') }}" class="nav-item">
-                            Capitanes - SPYCODES
-                            <span class="icon">
-                                <i class="fa fa-user-secret"></i>
-                            </span>
-                        </a>
-                        <a href="{{ route('spycodes_view') }}" class="nav-item">
-                            Tablero - SPYCODES
-                            <span class="icon">
-                                <i class="fa fa-gamepad"></i>
                             </span>
                         </a>
                     </div>
@@ -62,10 +56,9 @@
 
     @if (session('message'))
         <section class="section">
-            <article class="message {{ session('messageClass') }}">
-                <div class="message-header">Mensaje</div>
-                <div class="message-body">{{ session('message') }}</div>
-            </article>
+            <div class="notification {{ session('messageClass') }}">
+                {{ session('message') }}
+            </div>
         </section>
     @endif
 

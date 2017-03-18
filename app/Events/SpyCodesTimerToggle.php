@@ -13,14 +13,16 @@ class SpyCodesTimerToggle implements ShouldBroadcast
 {
     use InteractsWithSockets, SerializesModels;
 
+    public $id;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($id)
     {
-
+        $this->id = $id;
     }
 
     /**
