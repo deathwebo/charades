@@ -27,7 +27,10 @@ class SpyCodesController extends Controller
 
         $spycodesManager = new SpycodesManager();
 
-        $words = $spycodesManager->generateWords($id);
+        $words = $spycodesManager->getGeneratedWordsAsArray($id);
+        if (!$words) {
+            $words = $spycodesManager->generateWords($id);
+        }
 
         return view('spycodes.play', compact('id','words'));
     }
